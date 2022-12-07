@@ -1,0 +1,256 @@
+{
+  "metals": [
+    {
+      "id":11,
+      "variety": "Au",
+      "latestpri": 6185,
+      "openpri": 6312,
+      "maxpri": 6221,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-01"
+    },
+    {
+      "id":12,
+      "variety": "Au",
+      "latestpri": 6985,
+      "openpri": 6412,
+      "maxpri": 6721,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-02"
+    },{
+      "id":13,
+      "variety": "Au",
+      "latestpri": 6885,
+      "openpri": 6112,
+      "maxpri": 6421,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-03"
+    },{
+      "id":14,
+      "variety": "Au",
+      "latestpri": 6285,
+      "openpri": 6212,
+      "maxpri": 6921,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-04"
+    },{
+      "id":15,
+      "variety": "Au",
+      "latestpri": 6785,
+      "openpri": 6812,
+      "maxpri": 6021,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-05"
+    },{
+      "id":16,
+      "variety": "Au",
+      "latestpri": 6385,
+      "openpri": 6712,
+      "maxpri": 6121,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-06"
+    },{
+      "id":17,
+      "variety": "Au",
+      "latestpri": 6685,
+      "openpri": 6912,
+      "maxpri": 6321,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-07"
+    }
+  ,
+    {
+      "id":21,
+      "variety": "Ag",
+      "latestpri": 6585,
+      "openpri": 4312,
+      "maxpri": 3221,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-01"
+    },
+    {
+      "id":22,
+      "variety": "Ag",
+      "latestpri": 6785,
+      "openpri": 4612,
+      "maxpri": 4721,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-02"
+    },{
+      "id":23,
+      "variety": "Ag",
+      "latestpri": 6285,
+      "openpri": 4112,
+      "maxpri": 4421,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-03"
+    },{
+      "id":24,
+      "variety": "Ag",
+      "latestpri": 6985,
+      "openpri": 4112,
+      "maxpri": 4921,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-04"
+    },{
+      "id":25,
+      "variety": "Ag",
+      "latestpri": 6385,
+      "openpri": 4612,
+      "maxpri": 4021,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-05"
+    },{
+      "id":26,
+      "variety": "Ag",
+      "latestpri": 6885,
+      "openpri": 4712,
+      "maxpri": 4121,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-06"
+    },{
+      "id":27,
+      "variety": "Ag",
+      "latestpri": 6185,
+      "openpri": 4912,
+      "maxpri": 4321,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-07"
+    },
+    {
+      "id":21,
+      "variety": "Pt",
+      "latestpri": 6885,
+      "openpri": 3312,
+      "maxpri": 5221,
+      "limit": 6581,
+      "yespri": 6118,
+      "totalvol": 1564524,
+      "time": "2022-10-01"
+    },
+    {
+      "id":22,
+      "variety": "Pt",
+      "latestpri": 6285,
+      "openpri": 3612,
+      "maxpri": 5721,
+      "limit": 6581,
+      "yespri": 6218,
+      "totalvol": 1564524,
+      "time": "2022-10-02"
+    },{
+      "id":23,
+      "variety": "Pt",
+      "latestpri": 6385,
+      "openpri": 3112,
+      "maxpri": 5421,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-03"
+    },{
+      "id":24,
+      "variety": "Pt",
+      "latestpri": 6185,
+      "openpri": 5312,
+      "maxpri": 5321,
+      "limit": 6581,
+      "yespri": 6718,
+      "totalvol": 1564524,
+      "time": "2022-10-04"
+    },{
+      "id":25,
+      "variety": "Pt",
+      "latestpri": 6985,
+      "openpri": 3612,
+      "maxpri": 5421,
+      "limit": 6681,
+      "yespri": 6918,
+      "totalvol": 1564524,
+      "time": "2022-10-05"
+    },{
+      "id":26,
+      "variety": "Pt",
+      "latestpri": 6085,
+      "openpri": 3712,
+      "maxpri": 5121,
+      "limit": 6881,
+      "yespri": 6218,
+      "totalvol": 1564524,
+      "time": "2022-10-06"
+    },{
+      "id":27,
+      "variety": "Pt",
+      "latestpri": 6485,
+      "openpri": 3912,
+      "maxpri": 5321,
+      "limit": 6681,
+      "yespri": 6818,
+      "totalvol": 1564524,
+      "time": "2022-10-07"
+    }
+  
+  ],
+  "types":[
+    {
+      "id":1,
+      "name":"Au",
+      "totalvol":10023,
+      "cnname":"金"
+    },
+    {
+      "id":2,
+      "name":"Ag",
+      "totalvol":10623,
+      "cnname":"银"
+    },
+    {
+      "id":3,
+      "name":"Pt",
+      "totalvol":14023,
+      "cnname":"铂"
+    }
+  ],
+  "avers":[
+    {
+      "name":"Au",
+      "value":223123
+    },
+    {
+      "name":"Ag",
+      "value":120129
+    },
+    {
+      "name":"Pt",
+      "value":144176
+    }
+  ]
+}
