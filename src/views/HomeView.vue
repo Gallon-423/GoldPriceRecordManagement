@@ -11,7 +11,7 @@
           <template #suffix> 种贵金属 </template>
         </n-statistic>
       </n-col>
-      <n-col span="6">
+      <n-col v-if="metalTypes?(metalTypes?.length as number>=1):false" span="6">
         <n-statistic :label="`${metalTypes?metalTypes[0].cnname:'第一种金属'}总成交量`" tabular-nums>
           <n-number-animation
             ref="numberAnimationInstRef"
@@ -21,7 +21,7 @@
           <template #suffix> 克 </template>
         </n-statistic>
       </n-col>
-      <n-col span="6">
+      <n-col v-if="metalTypes?(metalTypes?.length as number>=2):false" span="6">
         <n-statistic :label="`${metalTypes?metalTypes[1].cnname:'第二种金属'}总成交量`" tabular-nums>
           <n-number-animation
             ref="numberAnimationInstRef"
@@ -49,7 +49,7 @@ import {
 } from "@/api";
 import { ref, onMounted, reactive } from "vue";
 const metals = ref<MetalRecord[] | null>([]);
-const metalTypes = ref<Variety[] | null>();
+const metalTypes = ref<Variety[]>();
 const metalVols = ref<Number[]|null>([]);
 const option = reactive({
   title: {

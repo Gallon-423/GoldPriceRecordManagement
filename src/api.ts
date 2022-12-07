@@ -6,13 +6,15 @@ export interface MetalRecord {
   limit: string;
   maxpri: number;
   minpri: number;
-  id: number;
+  id?: number;
   openpri: number;
   time: string;
   totalvol: number;
   variety: string;
   yespri: number;
 }
+
+
 
 export interface VarietyResponse {
   variety: Variety[];
@@ -91,7 +93,18 @@ export async function getAverVol(variety: string) {
   }
 }
 
-// DELETE 删除记录
-export async function deleteMetal(id: number) {
-  await instance.delete(`/avers?name=${id}`);
+// DELETE /api/records/{id} 删除记录
+export async function deleteRecord(id: number) {
+  await instance.delete(`/api/records/${id}`);
+}
+
+
+// POST /api/records 插入记录
+export async function insertRecord(record: MetalRecord) {
+  await instance.post(`/api/records`,record);
+}
+
+// PUT /api/records/{id} 更新记录
+export async function updateRecord(id:number,record: MetalRecord) {
+  await instance.put(`/api/records/${id}`,record);
 }

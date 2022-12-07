@@ -1,13 +1,5 @@
 <script lang="ts" setup>
-import {
-  deleteMetal,
-  getMetals,
-  getMetalsByName,
-  getMetalTypes,
-  type Metal,
-  type MetalType,
-  type MetalTypeTag,
-} from "@/api";
+import { getVarieties, insertRecord, type MetalRecord, type Variety } from "@/api";
 import { number } from "echarts";
 import {
   NButton,
@@ -26,32 +18,31 @@ import { defineComponent, h, nextTick, ref } from "vue";
 const message = useMessage();
 
 const value = ref<string|null>(null);
-const metalTypes = ref<MetalType[] | null>();
+const metalTypes = ref<Variety[] | null>();
 const options = ref([] as any[]);
-const tableData = ref<Metal[] | null>();
-const dialog = useDialog();
-getMetalTypes().then((res) => {
-  metalTypes.value = res;
-  res?.forEach((element) => {
+const tableData = ref<MetalRecord[] | null>();
+
+getVarieties().then((res) => {
+  metalTypes.value = res?.variety;
+  res?.variety.forEach((element) => {
     options.value?.push({
-      label: `${element.cnname}(${element.name})`,
-      value: element.name,
+      label: `${element.cnname}(${element.variety})`,
+      value: element.variety,
     } );
   });
 });
-const handleDelete = (id: number) => {
-  deleteMetal(id).then(
-    (res) => {
-      message.success("删除成功,刷新后查看结果！");
-    },
-    (err) => {
-      message.error("当前记录不存在");
-    }
-  );
-};
+
 const handleUpdateValue = (val: string, option: SelectOption) => {
   value.value = val
-  tableData.value = [{variety:"",time:"",id:-1,latestpri:0,maxpri:0,minpri:0,openpri:0,limit:"",yespri:0,totalvol:0}]
+  tableData.value = [{variety:"",time:"",id:-1,latestpri:0,maxpri:0,minpri:0,openpri:0,limit:"",yespri:0,totalvol:0,cnname:""}]
+}
+
+const handleInsert = (record: MetalRecord) => {
+  insertRecord(record).then(res => {
+    message.success('插入完成')
+  }, err => {
+    message.success('插入失败，请检查数据是否正确！')
+  })
 }
 
 const columns = [
@@ -61,7 +52,11 @@ const columns = [
     key: "variety",
     render(row: any, index: any) {
       return h(NTag, {
-        type:"success"
+        type: "success",
+        style: {
+          width: '5vw',
+          overflow:'hidden'
+        }
       },[value.value]);
     },
   },
@@ -158,7 +153,7 @@ const columns = [
               onClick: () => {
                 console.log("row==>", row);
                 console.log("index==>", index);
-                message.success('牛马')
+                handleInsert(row as MetalRecord);
               },
             },
             [`提交`]

@@ -1,13 +1,5 @@
 <script lang="ts" setup>
-import {
-  deleteMetal,
-  getMetals,
-  getMetalsByName,
-  getMetalTypes,
-  type Metal,
-  type MetalType,
-  type MetalTypeTag,
-} from "@/api";
+import { deleteRecord, getRecords, getRecordsByVariety, getVarieties, updateRecord, type MetalRecord, type Variety } from "@/api";
 import {
   NButton,
   NCard,
@@ -25,36 +17,43 @@ import { defineComponent, h, nextTick, ref } from "vue";
 const message = useMessage();
 
 const value = ref(null);
-const metalTypes = ref<MetalType[] | null>();
-const options = ref<MetalTypeTag[] | null>([{ label: `全部`, value: `all` }]);
-const tableData = ref<Metal[] | null>();
+const metalTypes = ref<Variety[] | null>();
+const options = ref([{ label: `全部`, value: `all` }]);
+const tableData = ref<MetalRecord[] | null>();
 const dialog = useDialog();
-getMetalTypes().then((res) => {
-  metalTypes.value = res;
-  res?.forEach((element) => {
+getVarieties().then((res) => {
+  metalTypes.value = res?.variety;
+  res?.variety.forEach((element) => {
     options.value?.push({
-      label: `${element.cnname}(${element.name})`,
-      value: element.name,
-    } as MetalTypeTag);
+      label: `${element.cnname}(${element.variety})`,
+      value: element.variety,
+    });
   });
 });
 const handleDelete = (id: number) => {
-  deleteMetal(id).then(
+  deleteRecord(id).then(
     (res) => {
-      message.success("删除成功,刷新后查看结果！");
+      message.success("删除成功，刷新后查看结果！");
     },
     (err) => {
       message.error("当前记录不存在");
     }
   );
 };
+const handleSubmitUpdate = (id: number, record: MetalRecord)=>{
+  updateRecord(id, record).then(res => {
+    message.success("编辑成功，刷新后查看结果！")
+  }, err => {
+    message.error("编辑失败，请检查数据格式！")
+  })
+}
 function handleUpdateValue(value: string, option: SelectOption) {
   if (value == "all") {
-    getMetals().then((res) => {
+    getRecords().then((res) => {
       tableData.value = res;
     });
   } else {
-    getMetalsByName(value).then((res) => {
+    getRecordsByVariety(value).then((res) => {
       tableData.value = res;
       console.log("tableData==>", tableData);
     });
@@ -192,9 +191,8 @@ const columns = [
               type: "success",
               size: "small",
               onClick: () => {
-                console.log("row==>", row);
-                console.log("index==>", index);
-                message.success('牛马')
+                handleSubmitUpdate(row.id, row as MetalRecord)
+                console.log("edit row =>",row as MetalRecord);
               },
             },
             [`提交`]

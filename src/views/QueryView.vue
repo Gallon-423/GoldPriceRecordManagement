@@ -1,37 +1,30 @@
 <script lang="ts" setup>
-import {
-  getMetals,
-  getMetalsByName,
-  getMetalTypes,
-  type Metal,
-  type MetalType,
-  type MetalTypeTag,
-} from "@/api";
+import { getRecords, getRecordsByVariety, getVarieties, type MetalRecord, type Variety } from "@/api";
 import type { SelectOption } from "naive-ui";
 import { ref } from "vue";
 
 const value = ref(null);
-const metalTypes = ref<MetalType[] | null>();
-const options = ref<MetalTypeTag[] | null>([{ label: `全部`, value: `all` }]);
-const tableData = ref<Metal[] | null>();
-getMetalTypes().then((res) => {
-  metalTypes.value = res;
-  res?.forEach((element) => {
+const metalTypes = ref<Variety[] | null>();
+const options = ref([{ label: `全部`, value: `all` }]);
+const tableData = ref<MetalRecord[] | null>();
+getVarieties().then((res) => {
+  metalTypes.value = res?.variety;
+  res?.variety.forEach((element) => {
     options.value?.push({
-      label: `${element.cnname}(${element.name})`,
-      value: element.name,
-    } as MetalTypeTag);
+      label: `${element.cnname}(${element.variety})`,
+      value: element.variety,
+    });
   });
   console.log(res);
   console.log(options.value);
 });
 function handleUpdateValue(value: string, option: SelectOption) {
   if (value == "all") {
-    getMetals().then((res) => {
+    getRecords().then((res) => {
       tableData.value = res;
     });
   } else {
-    getMetalsByName(value).then((res) => {
+    getRecordsByVariety(value).then((res) => {
       tableData.value = res;
     });
   }
