@@ -21,10 +21,18 @@ getVarieties().then((res) => {
 function handleUpdateValue(value: string, option: SelectOption) {
   if (value == "all") {
     getRecords().then((res) => {
+      res?.forEach(element => {
+        element.time=element.time.split('T')[0]
+      });
       tableData.value = res;
+      
     });
   } else {
+    
     getRecordsByVariety(value).then((res) => {
+      res?.forEach(element => {
+        element.time=element.time.split('T')[0]
+      });
       tableData.value = res;
     });
   }

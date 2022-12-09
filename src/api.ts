@@ -52,7 +52,7 @@ export async function getRecord(id: number): Promise<MetalRecord | null> {
 // GET /api/records/all 获取所有记录
 export async function getRecords(): Promise<MetalRecord[] | null> {
   try {
-    const response = await instance.get("/api/records/all");
+    const response = await instance.get("/api/allrecords");
     return response.data;
   } catch (error) {
     return null;
@@ -92,6 +92,18 @@ export async function getAverVol(variety: string) {
     return null;
   }
 }
+
+// GET 获取金属总平均成交量
+export async function getTotalVol(variety: string) {
+  try {
+    const response = await instance.get(`/api/total/${variety}`);
+    console.log("getTotalVol->" + response.data);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
 
 // DELETE /api/records/{id} 删除记录
 export async function deleteRecord(id: number) {

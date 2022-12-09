@@ -85,6 +85,7 @@ getVarieties().then((res) => {
     })
     .forEach((name) => {
       getAverVol(name).then((res) => {
+       
         option.series[0].data.push({ value: res.vol, name: name });
       });
     });
@@ -92,6 +93,7 @@ getVarieties().then((res) => {
   console.log(res);
 });
 function handleUpdateValue(value: string, selectOption: SelectOption) {
+  option.series[0].data=[]
   if (value == "aver") {
     getVarieties().then((res) => {
       metalTypes.value = res?.variety;
@@ -102,6 +104,7 @@ function handleUpdateValue(value: string, selectOption: SelectOption) {
         })
         .forEach((name) => {
           getAverVol(name).then((res) => {
+           
             option.series[0].data.push({ value: res.vol, name: name });
           });
         });

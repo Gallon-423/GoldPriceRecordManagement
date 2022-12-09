@@ -34,7 +34,7 @@ getVarieties().then((res) => {
 
 const handleUpdateValue = (val: string, option: SelectOption) => {
   value.value = val
-  tableData.value = [{variety:"",time:"",id:-1,latestpri:0,maxpri:0,minpri:0,openpri:0,limit:"",yespri:0,totalvol:0,cnname:""}]
+  tableData.value = [{variety:"",time:"",latestpri:0,maxpri:0,minpri:0,openpri:0,limit:"",yespri:0,totalvol:0,cnname:""}]
 }
 
 const handleInsert = (record: MetalRecord) => {
@@ -151,7 +151,9 @@ const columns = [
               type: "success",
               size: "small",
               onClick: () => {
-                console.log("row==>", row);
+                
+                row.variety = value.value
+                console.log("row==>", row as MetalRecord);
                 console.log("index==>", index);
                 handleInsert(row as MetalRecord);
               },

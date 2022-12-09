@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-import { deleteRecord, getRecords, getRecordsByVariety, getVarieties, updateRecord, type MetalRecord, type Variety } from "@/api";
+import {
+  deleteRecord,
+  getRecords,
+  getRecordsByVariety,
+  getVarieties,
+  updateRecord,
+  type MetalRecord,
+  type Variety,
+} from "@/api";
 import {
   NButton,
   NCard,
@@ -13,7 +21,7 @@ import {
   type SelectOption,
 } from "naive-ui";
 
-import { defineComponent, h, nextTick, ref } from "vue";
+import { defineComponent, h, nextTick, reactive, ref } from "vue";
 const message = useMessage();
 
 const value = ref(null);
@@ -40,39 +48,60 @@ const handleDelete = (id: number) => {
     }
   );
 };
-const handleSubmitUpdate = (id: number, record: MetalRecord)=>{
-  updateRecord(id, record).then(res => {
-    message.success("编辑成功，刷新后查看结果！")
-  }, err => {
-    message.error("编辑失败，请检查数据格式！")
-  })
-}
+const handleSubmitUpdate = (id: number, record: MetalRecord) => {
+  updateRecord(id, record).then(
+    (res) => {
+      message.success("编辑成功，刷新后查看结果！");
+    },
+    (err) => {
+      message.error("编辑失败，请检查数据格式！");
+    }
+  );
+};
 function handleUpdateValue(value: string, option: SelectOption) {
   if (value == "all") {
     getRecords().then((res) => {
+      res?.forEach((element) => {
+        element.time = element.time.split("T")[0];
+      });
       tableData.value = res;
     });
   } else {
     getRecordsByVariety(value).then((res) => {
+      res?.forEach((element) => {
+        element.time = element.time.split("T")[0];
+      });
       tableData.value = res;
       console.log("tableData==>", tableData);
     });
   }
 }
-
+const pagination = reactive({
+  page: 1,
+  pageSize: 7,
+  onChange: (page: number) => {
+    pagination.page = page;
+  },
+});
 const columns = [
   {
     title: "记录号",
     key: "id",
+    defaultSortOrder: "ascend",
+    sorter: "default",
   },
   {
     title: "种类",
     key: "variety",
     sorter: "default",
     render(row: any, index: any) {
-      return h(NTag, {
-        type:"success"
-      },row.variety);
+      return h(
+        NTag,
+        {
+          type: "success",
+        },
+        row.variety
+      );
     },
   },
   {
@@ -84,7 +113,7 @@ const columns = [
       return h(NInput, {
         value: row.time,
         onUpdateValue(v) {
-          tableData.value![index].time = v;
+          tableData.value![pagination.page*pagination.pageSize+index].time = v;
         },
       });
     },
@@ -97,7 +126,7 @@ const columns = [
       return h(NInput, {
         value: row.openpri,
         onUpdateValue(v) {
-          tableData.value![index].openpri = +v;
+          tableData.value![pagination.page*pagination.pageSize+index].openpri = +v;
         },
       });
     },
@@ -110,7 +139,7 @@ const columns = [
       return h(NInput, {
         value: row.yespri,
         onUpdateValue(v) {
-          tableData.value![index].yespri = +v;
+          tableData.value![pagination.page*pagination.pageSize+index].yespri = +v;
         },
       });
     },
@@ -123,7 +152,7 @@ const columns = [
       return h(NInput, {
         value: row.maxpri,
         onUpdateValue(v) {
-          tableData.value![index].maxpri = +v;
+          tableData.value![pagination.page*pagination.pageSize+index].maxpri = +v;
         },
       });
     },
@@ -136,7 +165,8 @@ const columns = [
       return h(NInput, {
         value: row.limit,
         onUpdateValue(v) {
-          tableData.value![index].limit = v;
+          console.log("index", index);
+          tableData.value![pagination.page*pagination.pageSize+index].limit = v;
         },
       });
     },
@@ -149,7 +179,7 @@ const columns = [
       return h(NInput, {
         value: row.totalvol,
         onUpdateValue(v) {
-          tableData.value![index].totalvol = +v;
+          tableData.value![pagination.page*pagination.pageSize+index].totalvol = +v;
         },
       });
     },
@@ -191,8 +221,8 @@ const columns = [
               type: "success",
               size: "small",
               onClick: () => {
-                handleSubmitUpdate(row.id, row as MetalRecord)
-                console.log("edit row =>",row as MetalRecord);
+                handleSubmitUpdate(row.id, row as MetalRecord);
+                console.log("edit row =>", row as MetalRecord);
               },
             },
             [`提交`]
@@ -217,7 +247,7 @@ const columns = [
       <n-data-table
         :columns="columns"
         :data="tableData"
-        :pagination="{ pageSize: 7 }"
+        :pagination="pagination"
       />
     </n-row>
   </div>

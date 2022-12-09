@@ -44,7 +44,7 @@ const option = reactive({
 getVarieties().then((res) => {
   metalTypes.value = res?.variety;
   option.legend.data = res?.variety.map((e) => {
-    return e.cnname;
+    return e.variety;
   }) as any[];
   option.title.text = "开盘价对比";
   option.legend.data.forEach((e) => {

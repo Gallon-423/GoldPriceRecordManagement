@@ -21,7 +21,7 @@
           <template #suffix> 克 </template>
         </n-statistic>
       </n-col>
-      <n-col v-if="metalTypes?(metalTypes?.length as number>=2):false" span="6">
+      <n-col span="6">
         <n-statistic :label="`${metalTypes?metalTypes[1].cnname:'第二种金属'}总成交量`" tabular-nums>
           <n-number-animation
             ref="numberAnimationInstRef"
@@ -42,6 +42,7 @@
 import {
   getAverVol,
   getRecords,
+  getTotalVol,
   getVarieties,
   type MetalRecord,
   type Variety,
@@ -156,7 +157,7 @@ getRecords().then((res) => {
 getVarieties().then((res) => {
   metalTypes.value = res?.variety;
   res?.variety.forEach(ele => {
-    getAverVol(ele.variety).then(
+    getTotalVol(ele.variety).then(
       res => {
         metalVols.value?.push(res.vol)
         console.log("getAverVol->",res);
